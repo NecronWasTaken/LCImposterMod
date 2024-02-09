@@ -19,7 +19,7 @@ namespace LCImposterMod
     {
         private const string modGUID = "NecronWasTaken.LCImposterMod";
         private const string modName = "LC Imposter Mod";
-        private const string modVersion = "0.0.1.0";
+        private const string modVersion = "0.0.1";
         private const string modAuthor = "NecronWasTaken";
 
         private readonly Harmony harmony = new Harmony(modGUID);
@@ -36,8 +36,6 @@ namespace LCImposterMod
             }
 
             mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
-
-            // mls.LogInfo("The Imposter Mod has awaken :D");
 
             harmony.PatchAll(typeof(ImposterModBase));
             harmony.PatchAll(typeof(MainPatch));
@@ -69,7 +67,7 @@ namespace LCImposterMod
             {
                 TriggerNode = triggerNode,
                 Category = "other",
-                Description = "Set an imposter settings for the next round.",
+                Description = "Set an imposter mode settings.",
                 DisplayTextSupplier = MainPatch.SetImposterSettings
             });
         }

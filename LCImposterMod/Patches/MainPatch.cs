@@ -39,21 +39,12 @@ namespace LCImposterMod.Patches
         { 
             int playerCount = __instance.ClientPlayerList.Count;
             ulong[] playersIds = __instance.ClientPlayerList.Keys.ToArray();
-            
-            /*ImposterModBase.mls.LogInfo("Start game! Is server? :" + __instance.IsServer);
-            ImposterModBase.mls.LogInfo("Player list:");
-            foreach (var client in __instance.ClientPlayerList)
-            {
-                ImposterModBase.mls.LogInfo(client.Key + " " + client.Value);
-            }*/
 
             int randomNumber = UnityEngine.Random.Range(0, 100);
-            // ImposterModBase.mls.LogInfo("Random number (spawn rate): " + randomNumber);
             if (randomNumber < spawnChance)
             {
                 randomNumber = UnityEngine.Random.Range(0, playerCount);
                 customServerMessage.SendClient(nickname, (ulong)randomNumber);
-                // ImposterModBase.mls.LogInfo("Random number (who it is): " + randomNumber + " Player id: " + playersIds[randomNumber]);
             }
             isRoundStarted = true;
         }
@@ -87,13 +78,11 @@ namespace LCImposterMod.Patches
 
         private static void ReceiveByServer(string data, ulong id)
         {
-            // ImposterModBase.mls.LogInfo("Message by server recieved!" + data);
             _roleText.text = data;
             _roleText.color = Color.red;
         }
         private static void ReceiveFromServer(string data)
         {
-            // ImposterModBase.mls.LogInfo("Message from server recieved!" + data);
             _roleText.text = data;
             _roleText.color = Color.red;
         }
@@ -135,10 +124,11 @@ namespace LCImposterMod.Patches
 
                     case "nickname":
                         nickname = array[2];
-                        return $"Imposter nickname are set to: {nickname}\n";
+                        return $"Imposter nickname are set to: '{nickname}'\n";
 
                     case "chance":
                         int chance = Int32.Parse(array[2]);
+                        if (chance < 0 || chance > 100) return "Invalid spawn chance value (0-100).\n";
                         spawnChance = chance;
                         return $"Imposter spawn chance are set to: {array[2]}%\n";
 
