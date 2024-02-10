@@ -1,6 +1,8 @@
 # LCImposterMod
 This is small mod adds text on the HUD as a role of the random player in the lobby. Role text can be changed through terminal as well as spawn chance.
 
+[Thunderstorm](https://thunderstore.io/c/lethal-company/p/NecronWasTaken/LCImposterMod/)
+
 ## Terminal commands:
   ##### Show current settings.
     imposter status
